@@ -10,7 +10,7 @@ import (
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/miguelmota/go-etherdelta/helpers"
+	"github.com/mathieugilbert/go-etherdelta/helpers"
 	solsha3 "github.com/miguelmota/go-solidity-sha3"
 	"github.com/shopspring/decimal"
 )
@@ -60,7 +60,7 @@ func TestGetOrderBook(t *testing.T) {
 func TestGetTokenTicker(t *testing.T) {
 	//t.Skip("Skipping GetTokenPrice")
 	getTokenTickerOpts := &GetTokenTickerOpts{
-		TokenSymbol: "BAT",
+		TokenSymbol: "OMG",
 	}
 
 	ticker, err := s.GetTokenTicker(getTokenTickerOpts)

@@ -20,9 +20,9 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
-	contracts "github.com/miguelmota/go-etherdelta/contracts"
-	"github.com/miguelmota/go-etherdelta/helpers"
-	"github.com/miguelmota/go-etherdelta/utils"
+	contracts "github.com/mathieugilbert/go-etherdelta/contracts"
+	"github.com/mathieugilbert/go-etherdelta/helpers"
+	"github.com/mathieugilbert/go-etherdelta/utils"
 	solsha3 "github.com/miguelmota/go-solidity-sha3"
 	"github.com/shopspring/decimal"
 )
@@ -342,7 +342,10 @@ func (s *Service) GetTokenTicker(opts *GetTokenTickerOpts) (*TokenTicker, error)
 	}
 
 	tickers := target["returnTicker"].(map[string]interface{})
-	ticker := tickers[fmt.Sprintf("ETH_%s", opts.TokenSymbol)].(map[string]interface{})
+	ticker, ok := tickers[fmt.Sprintf("ETH_%s", opts.TokenSymbol)].(map[string]interface{})
+	if !ok {
+		return tokenTicker, fmt.Errorf("Error fetching ticker ETH_%s", opts.TokenSymbol)
+	}
 
 	if utils.KeyExists(ticker, "ask") {
 		if f, ok := ticker["ask"].(float64); ok {
